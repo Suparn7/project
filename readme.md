@@ -20,9 +20,15 @@ User management and authentication is a plus. The data have to be persisted in S
 
 ## How to work on the assessment:
 Clone this repository - https://github.com/cybergroupdevs/todoonboard-api
+
 Start working on the assignment
+
 Please do periodic commits with meaningful commit messages
+
 Once you are done push your final results
+
 Please include a brief description how to run your solution
+
 If you have any questions contact me (lagnesh.thakur@cygrp.com)
+
 Please note that any solution without periodic commits or inexecutable code will not be considered.
