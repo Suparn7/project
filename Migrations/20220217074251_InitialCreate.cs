@@ -11,7 +11,7 @@ namespace todoonboard_api.Migrations
                 name: "Board",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -29,7 +29,8 @@ namespace todoonboard_api.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Done = table.Column<bool>(type: "bit", nullable: false),
                     created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    updated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    board_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

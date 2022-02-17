@@ -10,5 +10,7 @@ namespace todoonboard_api.Models
         public System.DateTime created{get; set;}
 
         public DateTime updated{get; set;}
+
+        public int board_id{get; set;}
     }
 }

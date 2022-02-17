@@ -10,7 +10,7 @@ using todoonboard_api.Models;
 namespace todoonboard_api.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20220217062801_InitialCreate")]
+    [Migration("20220217074251_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,9 @@ namespace todoonboard_api.Migrations
 
             modelBuilder.Entity("todoonboard_api.Models.Board", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
@@ -48,6 +48,9 @@ namespace todoonboard_api.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("board_id")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("created")
                         .HasColumnType("datetime2");

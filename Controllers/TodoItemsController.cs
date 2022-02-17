@@ -29,16 +29,16 @@ namespace todoonboard_api.Controllers
 
         // GET: api/TodoItems/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItem(int id)
         {
-            var todoItem = await _context.TodoItems.FindAsync(id);
+            var todoItem = _context.TodoItems.Where(row => row.board_id == id);
 
             if (todoItem == null)
             {
                 return NotFound();
             }
 
-            return todoItem;
+            return await todoItem.ToListAsync();
         }
 
         // PUT: api/TodoItems/5
