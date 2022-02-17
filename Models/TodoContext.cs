@@ -14,5 +14,7 @@ namespace todoonboard_api.Models
         public DbSet<TodoItem> TodoItems { get; set; }
 
         public DbSet<Board> Board { get; set; }
+
+        public DbSet<User> Users { get; set; } = null!;
     }
 }

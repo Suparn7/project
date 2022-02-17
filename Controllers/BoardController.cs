@@ -85,7 +85,7 @@ namespace todoonboard_api.Controllers
 
         // DELETE: api/Board/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBoard(long id)
+        public async Task<IActionResult> DeleteBoard(int id)
         {
             var board = await _context.Board.FindAsync(id);
             if (board == null)

@@ -11,6 +11,7 @@ namespace todoonboard_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -41,10 +42,23 @@ namespace todoonboard_api.Controllers
             return await todoItem.ToListAsync();
         }
 
+        [HttpGet("uncompletedTodos")]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> uncompletedTodoItems()
+        {
+            var todoItem = _context.TodoItems.Where(row => row.Done== false);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            return await todoItem.ToListAsync();
+        }
+
         // PUT: api/TodoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
+        public async Task<IActionResult> PutTodoItem(int id, TodoItem todoItem)
         {
             if (id != todoItem.Id)
             {
@@ -85,7 +99,7 @@ namespace todoonboard_api.Controllers
 
         // DELETE: api/TodoItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoItem(long id)
+        public async Task<IActionResult> DeleteTodoItem(int id)
         {
             var todoItem = await _context.TodoItems.FindAsync(id);
             if (todoItem == null)
