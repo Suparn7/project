@@ -35,7 +35,7 @@ https://localhost:5001/api/board/1
 
 
 <!-- - List all Todos on a board  -->[DONE]
-https://localhost:5001/api/todoitems/
+https://localhost:5001/api/todoitems/1
 <!-- POST with board id and authorization token-->
 
 
