@@ -44,7 +44,7 @@ namespace todoonboard_api.Controllers
         // PUT: api/Board/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBoard(long id, Board board)
+        public async Task<IActionResult> PutBoard(int id, Board board)
         {
             if (id != board.Id)
             {
@@ -70,6 +70,33 @@ namespace todoonboard_api.Controllers
             }
 
             return NoContent();
+        }
+
+
+        [HttpPatch("{id}")]
+
+        public async Task<IActionResult> PatchBoardTitle(int id, Board  board)
+
+        {
+
+            if (id != board.Id)
+
+            {
+
+                return BadRequest();
+
+            }
+
+            var item = await _context.Board.FirstOrDefaultAsync(item => item.Id == id);
+
+            if (item == null) return BadRequest();
+
+            item.Name = board.Name == null ? item.Name : board.Name;
+            
+            _context.SaveChangesAsync();
+
+            return Ok(item);
+
         }
 
         // POST: api/Board

@@ -32,7 +32,7 @@ namespace todoonboard_api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItem(int id)
         {
-            var todoItem = _context.TodoItems.Where(row => row.board_id == id);
+            var todoItem = _context.TodoItems.Where(row => row.board.Id == id);
 
             if (todoItem == null)
             {
@@ -65,7 +65,15 @@ namespace todoonboard_api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(todoItem).State = EntityState.Modified;
+            var item = await _context.TodoItems.FirstOrDefaultAsync(item => item.Id == id);
+
+            item.updated = DateTime.UtcNow;
+            item.Title = todoItem.Title;
+            item.Done = todoItem.Done;
+
+            // item.board_id = todoItem.board_id;
+
+            _context.Entry(item).State = EntityState.Modified;
 
             try
             {
@@ -86,11 +94,46 @@ namespace todoonboard_api.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{id}")]
+
+        public async Task<IActionResult> PatchTodoItem(int id, TodoItem todoItem)
+
+        {
+
+            if (id != todoItem.Id)
+
+            {
+
+                return BadRequest();
+
+            }
+
+            var item = await _context.TodoItems.FirstOrDefaultAsync(item => item.Id == id);
+
+            if (item == null) return BadRequest();
+
+            item.Title = todoItem.Title == null ? item.Title : todoItem.Title;
+
+            item.updated = DateTime.UtcNow;
+
+            item.Done = todoItem.Done;
+
+             //item.board = todoItem.board == 0 ? item.board_id : todoItem.board_id;
+
+            _context.SaveChangesAsync();
+
+            return Ok(item);
+
+        }
+
         // POST: api/TodoItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
         {
+             var board = _context.Board.Find(todoItem.board.Id);
+
+            todoItem.board = board;
             _context.TodoItems.Add(todoItem);
             await _context.SaveChangesAsync();
 

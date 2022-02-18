@@ -10,8 +10,8 @@ using todoonboard_api.Models;
 namespace todoonboard_api.Migrations
 {
     [DbContext(typeof(TodoContext))]
-    [Migration("20220217102342_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220218111753_AddInitialCreate")]
+    partial class AddInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,7 @@ namespace todoonboard_api.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("board_id")
+                    b.Property<int?>("boardId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("created")
@@ -60,7 +60,42 @@ namespace todoonboard_api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("boardId");
+
                     b.ToTable("TodoItems");
+                });
+
+            modelBuilder.Entity("todoonboard_api.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("todoonboard_api.Models.TodoItem", b =>
+                {
+                    b.HasOne("todoonboard_api.Models.Board", "board")
+                        .WithMany()
+                        .HasForeignKey("boardId");
+
+                    b.Navigation("board");
                 });
 #pragma warning restore 612, 618
         }
