@@ -14,56 +14,56 @@ Open postman -> Use Different http methods(Listed below) to access everything as
 
 ## Via a REST API it is possible to:
 
-<!-- - List all boards -->[DONE]
+- List all boards[DONE]
 https://localhost:5001/api/board 
-<!-- GET -->
+GET
 
 
-<!-- - Add a new board  -->[DONE]
+- Add a new board [DONE]
 https://localhost:5001/api/board
-<!-- POST -->
+POST
 
 
-<!-- - Change a board's title  -->{DONE}
+- Change a board's title {DONE}
 https://localhost:5001/api/board/1
-<!-- PATCH -->
+PATCH
 
 
-<!-- - Remove a board  -->[DONE]
+- Remove a board [DONE]
 https://localhost:5001/api/board/1
-<!-- DELETE -->
+DELETE
 
 
-<!-- - List all Todos on a board  -->[DONE]
+- List all Todos on a board [DONE]
 https://localhost:5001/api/todoitems/1
-<!-- POST with board id and authorization token-->
+POST with board id and authorization token
 
 
-<!-- - List only uncompleted Todos  -->[DONE]
+- List only uncompleted Todos [DONE]
 https://localhost:5001/api/todoitems/uncompletedTodos
-<!-- GET -->
+GET
 
 
-<!-- - Add a Todo to a board  -->[DONE]
+- Add a Todo to a board [DONE]
 https://localhost:5001/api/todoitems
-<!-- POST with board  id -->
+POST with board  id
 
-<!-- - Change a Todo's title or status --> [DONE]
-<!-- https://localhost:5001/api/todoitems/7 -->
-<!-- PATCH send id -->
+- Change a Todo's title or status [DONE]
+https://localhost:5001/api/todoitems/7
+PATCH send id
 
-<!-- - Delete a Todo  -->[DONE]
+- Delete a Todo [DONE]
 https://localhost:5001/api/todoitems/3
-<!-- DELETE with id -->
+DELETE with id
 
-<!-- -user management -->[DONE]
+-user management[DONE]
 https://localhost:5001/users/create
-<!-- CREATE by passing firstname, lastname,username and password -->
+CREATE by passing firstname, lastname,username and password
 
 
-<!-- -user autthentication -->  [DONE]
+-user autthentication  [DONE]
 https://localhost:7186/Users/authenticate
-<!-- POST by passing username and password saved in database -->
+POST by passing username and password saved in database
 
 Data is being persisted in SQL Server using EF Core.
 
